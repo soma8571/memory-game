@@ -1,0 +1,37 @@
+body {
+    background-color: green;
+}
+table.memory {
+    border-collapse: collapse;
+    border: 1px solid yellow;
+}
+
+.closed {
+    border: 1px solid yellow;
+    background-color: #AAAAAA;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.opened {
+    border: 1px solid yellow;
+    background-color: black;
+    color: greenyellow;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+div.flex-cont {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.flex-cont div {
+    margin: 30px;
+}

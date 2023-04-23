@@ -4,10 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Memória játék</title>
 </head>
 <body>
     
+    <div class="flex-cont">
+
+        <div class="game">
+
+            <label for="game-level">Level:</label>
+            <select id="game-level">
+                <option value="">Please select</option>
+                <option value="16">Easy (4x4)</option>
+                <option value="36">Medium (6x6)</option>
+                <option value="64">Hard (8x8)</option>
+            </select>
+
+            <div id="game-grid"></div>
+        
+            <p>
+                <button onclick="openAll()">Open up all</button>
+            </p>
+            
+            <p>
+                <button onclick="closeAll()">Close all</button>
+            </p>
+
+        </div>
+        
+        <div class="display">
+            <ul>
+                <li>Kattintások száma: <span id="clickNumber">0</span></li>
+                <li>Találatok száma: <span id="matches">0</span></li>
+                <li>Eltelt idő: <span id="time"></span></li>
+            </ul>
+        </div>
+        
+
+    </div>
+    
+
     <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
