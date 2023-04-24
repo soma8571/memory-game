@@ -1,13 +1,13 @@
 body {
-    background-color: green;
+    background-color: teal;
 }
 table.memory {
     border-collapse: collapse;
-    border: 1px solid yellow;
+    border: 2px solid black;
 }
 
 .closed {
-    border: 1px solid yellow;
+    border: 1px solid gray;
     background-color: #AAAAAA;
     padding: 5px;
     width: 30px;
@@ -15,9 +15,21 @@ table.memory {
 }
 
 .opened {
-    border: 1px solid yellow;
-    background-color: black;
-    color: greenyellow;
+    border: 1px solid gray;
+    background-color: cyan;
+    color: black;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.ready {
+    border: 1px solid gray;
+    background-color: yellowgreen;
+    color: whitesmoke;
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
