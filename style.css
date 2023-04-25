@@ -1,41 +1,68 @@
+* {
+    font-size: 20px;
+    box-sizing: border-box;
+}
+
 body {
     background-color: teal;
 }
+
+h1 {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+div.description {
+    width: 70%;
+    padding: 20px;
+    margin: 50px auto;
+    text-align: justify;
+    line-height: 25px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+span.desc {
+    text-decoration: underline;
+}
+
+select {
+    font-size: 0.8em;
+}
+
+select option {
+    font-size: 0.8em;
+}
+
 table.memory {
     border-collapse: collapse;
     border: 2px solid black;
 }
 
+table.memory td {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+}
+
 .closed {
     border: 1px solid gray;
     background-color: #AAAAAA;
-    padding: 5px;
-    width: 30px;
-    height: 30px;
 }
 
 .opened {
     border: 1px solid gray;
     background-color: cyan;
     color: black;
-    font-size: 1.1em;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px;
-    width: 30px;
-    height: 30px;
 }
 
 .ready {
     border: 1px solid gray;
     background-color: yellowgreen;
     color: whitesmoke;
-    font-size: 1.1em;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px;
-    width: 30px;
-    height: 30px;
 }
 
 div.flex-cont {
@@ -46,4 +73,18 @@ div.flex-cont {
 
 div.flex-cont div {
     margin: 30px;
+}
+
+ul {
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 15px;
+}
+
+div.game-over {
+    width: 70%;
+    margin: 25px auto;
+    padding: 10px;
 }

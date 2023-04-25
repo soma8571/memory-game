@@ -1,38 +1,39 @@
-//Level kiválasztása
+//Eseménykezelő a nehézségi szint kiválasztására szolgáló select change eseményére
+//Itt indul a játék
 document.getElementById("game-level").addEventListener("change", racsLetrehozas);
 
 //Ebben a tömbben tároljuk a játékhoz szükséges számokat
-var szamok = [];
+let szamok = [];
 
 //A játék végét jelző változó
-var gameOver = false;
+let gameOver = false;
 
 //segédváltozó (tesztelés, hibakeresési célokra)
 //Objektum tömb, amely tárolja az egyes cellák "cím" és érték adatait tartalmazó objektumot
-var tarolo = [];
+let tarolo = [];
 
 //span elem, ahol megjelenítjük a játék során keletkező kattintások számát
-var clicksDisplay = document.getElementById("clickNumber");
+const clicksDisplay = document.getElementById("clickNumber");
 
 //span elem a találatok megjelenítésére
-var matchesDisplay = document.getElementById("matches");
+const matchesDisplay = document.getElementById("matches");
+
+//span elem az eltelt idő kijelzésére
+const timeDisplay = document.getElementById("time");
 
 //a találatok számolására szolgáló változó
-var matches = 0;
+let matches = 0;
 
 //A játék végéhez szükséges találatok száma
-var neededMatchesToEnd;
+let neededMatchesToEnd;
 
 //Objektum tömb, amely tárolja azon cellák adatait, amiken kattintás történt
 //ennek segítségével lesz eldönthető, hogy történt-e kattintás két azonos számot tartalmazó cellán 
 //tehát van-e találat 
-var kattintasTarolo = [];
-
-//span elem az eltelt idő kijelzésére
-var timeDisplay = document.getElementById("time");
+let kattintasTarolo = [];
 
 //A játékidő mérésére szolgáló változó
-var elapsedSec; 
+let elapsedSec; 
 
 //Létrehoz egy - a kiválasztatott nehézségi szinttől függő hosszúságú - számsort
 //A számsort aztán lemásolja, majd az így létrejött két azonos számtömböt Spread operátorral összefűzi
@@ -160,6 +161,9 @@ function openUp() {
 function talalatFigyelo(cellaAdatok) {
 
     kattintasTarolo.push(cellaAdatok);
+    //Csak a működés ellenőrzéséhez
+    //console.log(kattintasTarolo);
+    clicksDisplay.innerHTML = kattintasTarolo.length;
 
     if (kattintasTarolo.length > 1) {
         let lastObj = kattintasTarolo.at(-1);
@@ -178,10 +182,8 @@ function talalatFigyelo(cellaAdatok) {
             return true;
         } else
             return false;
-    }
-    console.log(kattintasTarolo);
-    clicksDisplay.innerHTML = kattintasTarolo.length;
-    return false;
+    } else 
+        return false;
 }
 
 //A találat esetén módosítja a cella megjelenítését

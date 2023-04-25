@@ -9,20 +9,31 @@
 </head>
 <body>
     
+
+    <h1>Üdv a memória fejlesztő játékban</h1>
+
+    <div class="description">
+        <span class="desc">A játék leírása:</span> a választott nehézségi szinttől függően megjelenik egy
+        n x n -es négyzet, ami rejtett számpárokat tartalmaz véletlenszerű sorrendben. A játék célja, hogy
+        a számpárokat megtaláljuk. Megtaláltnak akkor minősül egy számpár, ha két egymást követő kattintással
+        azonos számot rejtő cellára kattintunk. 
+    </div>
+
     <div class="flex-cont">
 
         <div class="game">
 
-            <label for="game-level">Level:</label>
+            <label for="game-level">Nehézségi szint:</label>
             <select id="game-level">
-                <option value="0" selected="selected">Please select</option>
+                <option value="0" selected="selected">Kérlek válassz</option>
                 <option value="16">Easy (4x4)</option>
                 <option value="36">Medium (6x6)</option>
                 <option value="64">Hard (8x8)</option>
             </select>
 
             <div id="game-grid"></div>
-        
+            
+            <!--
             <p>
                 <button onclick="openAll()">Open up all</button>
             </p>
@@ -30,6 +41,7 @@
             <p>
                 <button onclick="closeAll()">Close all</button>
             </p>
+            -->
 
         </div>
         
@@ -40,7 +52,10 @@
                 <li>Eltelt idő: <span id="time"></span></li>
             </ul>
         </div>
-        
+
+    </div>
+
+    <div class="game-over">
 
     </div>
     
