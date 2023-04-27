@@ -256,9 +256,12 @@ function playAgain() {
     //a kattintásokat tároló tömb ürítése
     kattintasTarolo.splice(0, kattintasTarolo.length);
     tarolo.splice(0, tarolo.length);
+    
+    //Kijelző értékek nullázása
     clicksDisplay.innerHTML = 0;
     matchesDisplay.innerHTML = 0;
 
+    //Change esemény útnak indítása a nehézség kiválasztón (ez indítja az új játékot) 
     let changeEvent = new Event("change");
     levelSelect.dispatchEvent(changeEvent);
 
