@@ -1,6 +1,7 @@
 //Eseménykezelő a nehézségi szint kiválasztására szolgáló select change eseményére
 //Itt indul a játék
-document.getElementById("game-level").addEventListener("change", racsLetrehozas);
+let levelSelect = document.getElementById("game-level");
+levelSelect.addEventListener("change", racsLetrehozas);
 
 //Ebben a tömbben tároljuk a játékhoz szükséges számokat
 let szamok = [];
@@ -21,6 +22,9 @@ const matchesDisplay = document.getElementById("matches");
 //span elem az eltelt idő kijelzésére
 const timeDisplay = document.getElementById("time");
 
+//az eredmény megjelenítésére hivatott di
+const resultDiv = document.querySelector(".result");
+
 //a találatok számolására szolgáló változó
 let matches = 0;
 
@@ -33,7 +37,13 @@ let neededMatchesToEnd;
 let kattintasTarolo = [];
 
 //A játékidő mérésére szolgáló változó
-let elapsedSec; 
+let playTime = 0;
+
+//a cella "nyitvatartási" időzítője (setTimeout)
+let cellOpenTimer;
+
+//az időmérő setInterval változója
+let timeCounter;
 
 //Létrehoz egy - a kiválasztatott nehézségi szinttől függő hosszúságú - számsort
 //A számsort aztán lemásolja, majd az így létrejött két azonos számtömböt Spread operátorral összefűzi
@@ -117,10 +127,10 @@ function racsLetrehozas() {
 
         console.log(tarolo);
         
-        if (elapsedSec === 0)
+        if (playTime === 0)
             stopper();
         else {
-            clearInterval(elapsedTime);
+            clearInterval(timeCounter);
             stopper();
         }
     }
@@ -139,22 +149,24 @@ function openUp() {
     this.classList.remove("closed");
     this.classList.add("opened");
 
-    //ha nincs találat, akkor 800 ms múlva "visszazárjuk" a szám megjelenítését
-    if(!talalatFigyelo(cellaAdat))
+    //800 ms múlva "visszazárjuk" a szám megjelenítését
+    cellOpenTimer = setTimeout(() => {
+        this.classList.remove("opened");
+        this.classList.add("closed");
+        this.innerHTML = "";
+    }, 800);
 
-        setTimeout(() => {
-            this.classList.remove("opened");
-            this.classList.add("closed");
-            this.innerHTML = "";
-        }, 800);
-    
-    //ha találat volt, akkor ellenőrizni kell, hogy a játéknak nincs-e vége
-    else {
-        if (gameOver) {
-            clearInterval(elapsedTime);
-            alert("Gratulálok! Az időd: " + elapsedSec + " másodperc.");
-        }
+    talalatFigyelo(cellaAdat);
+
+    if (gameOver) {
+        clearInterval(timeCounter);
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `Gratulálok, a játékot sikeresen megoldottad! 
+                                A megfejtéshez ${playTime} másodpercre volt szükséged.`;
+        resultDiv.innerHTML += "<div><button onclick='playAgain()'>új játék</button></div>";
+            
     }
+
 }
 
 
@@ -169,7 +181,10 @@ function talalatFigyelo(cellaAdatok) {
         let lastObj = kattintasTarolo.at(-1);
         let secondlastObj = kattintasTarolo.at(-2);
         
+        //Akkor van érvényes találat, ha a legutóbbi két kattintás eltérő "címen" történt 
+        //(tehát nem ugyanazon a cellán) ÉS a cellák értékei viszont azonosak voltak
         if (lastObj.value === secondlastObj.value && lastObj.address !== secondlastObj.address) {
+            clearTimeout(cellOpenTimer);
             matches++;
             matchesDisplay.innerHTML = matches;
             setReady(secondlastObj.address);
@@ -193,10 +208,11 @@ function setReady(cellaAddress) {
 
     let value = cella.getAttribute("data-value");
 
-    cella.innerHTML = value;
     cella.classList.remove("closed");
     cella.classList.add("ready");
+    cella.innerHTML = value;
 
+    //a cellához rendelt eseménykezelő törlése, ergo többé nem nyitható fel
     cella.removeEventListener("click", openUp);
 }
 
@@ -220,14 +236,30 @@ function closeAll() {
 }
 */
 
-var elapsedTime;
 //A játékidőt mérő függvény
 function stopper() {
-    elapsedSec = 0;
+    playTime = 0;
 
-    elapsedTime = setInterval(()=> {
-        elapsedSec++;
-        timeDisplay.innerHTML = elapsedSec;
+    timeCounter = setInterval(()=> {
+        timeDisplay.innerHTML = playTime + " másodperc";
+        playTime++;
     }, 1000);
 }
 
+
+function playAgain() {
+
+    resultDiv.innerHTML = "";
+    resultDiv.style.display = "none";
+    gameOver = false;
+    matches = 0;
+    //a kattintásokat tároló tömb ürítése
+    kattintasTarolo.splice(0, kattintasTarolo.length);
+    tarolo.splice(0, tarolo.length);
+    clicksDisplay.innerHTML = 0;
+    matchesDisplay.innerHTML = 0;
+
+    let changeEvent = new Event("change");
+    levelSelect.dispatchEvent(changeEvent);
+
+}
