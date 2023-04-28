@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+}
+
+body {
+  background-color: #9B2915;
+  font-family: "Ubuntu", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.1em;
+  margin: 20px;
+  color: #E4D6A7;
+}
+
+div.description {
+  width: 80%;
+  padding: 20px;
+  margin: 50px auto;
+  text-align: justify;
+  line-height: 30px;
+  background-color: #E9B44C;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -moz-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+}
+
+span.desc {
+  text-decoration: underline;
+}
+
+select {
+  padding: 10px;
+  font-size: 0.9em;
+  font-family: "Ubuntu", sans-serif;
+  background-color: #E4D6A7;
+  border: none;
+}
+select option {
+  font-size: 0.9em;
+  font-family: "Ubuntu", sans-serif;
+}
+
+table.memory {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+table.memory td {
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+}
+table.memory td:hover {
+  cursor: pointer;
+}
+
+.closed {
+  border: 1px solid gray;
+  background-color: #AAAAAA;
+}
+
+.opened {
+  border: 1px solid gray;
+  background-color: aqua;
+  color: black;
+}
+
+.ready {
+  border: 1px solid gray;
+  background-color: yellowgreen;
+  color: whitesmoke;
+}
+
+div.flex-cont {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+div.flex-cont div {
+  margin: 20px 30px;
+}
+
+div.display {
+  background-color: #E9B44C;
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 270px;
+  box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -moz-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul li {
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+
+div.result {
+  display: none;
+  width: 70%;
+  margin: 25px auto;
+  padding: 20px;
+  background-color: #E9B44C;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+  -moz-box-shadow: 10px 10px 5px 1px rgba(28, 17, 10, 0.75);
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  color: black;
+  background-color: #50A2A7;
+  color: #E4D6A7;
+  border: none;
+  border-radius: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+span.display {
+  color: #50A2A7;
+}
+
+/*# sourceMappingURL=style.css.map */

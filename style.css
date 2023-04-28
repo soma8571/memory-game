@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: teal;
+    background-color: #8dab7f;
 }
 
 h1 {
@@ -18,7 +18,7 @@ div.description {
     margin: 50px auto;
     text-align: justify;
     line-height: 25px;
-    background-color: aqua;
+    background-color: #CFEE9E;
     border-radius: 10px;
 }
 
@@ -76,7 +76,7 @@ div.flex-cont div {
 }
 
 div.display {
-    background-color: aqua;
+    background-color: #CFEE9E;
     border-radius: 10px;
     padding: 20px;
 }
@@ -97,7 +97,7 @@ div.result {
     width: 70%;
     margin: 25px auto;
     padding: 20px;
-    background-color: yellowgreen;
+    background-color: #CFEE9E;
     border-radius: 10px;
 }
 

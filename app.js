@@ -36,6 +36,9 @@ let neededMatchesToEnd;
 //tehát van-e találat 
 let kattintasTarolo = [];
 
+//az megoldáshoz szükséges összes kattintásszámot tárolja
+let osszesKattintas = 0;
+
 //A játékidő mérésére szolgáló változó
 let playTime = 0;
 
@@ -85,6 +88,7 @@ function kever(szamTomb) {
 //"n" a választott nehézségi szinttől függ
 function racsLetrehozas() {
 
+    osszesKattintas = 0;
     let meret = this.value;
 
     if (meret > 0) {
@@ -97,9 +101,8 @@ function racsLetrehozas() {
         szamsorLetrehozas(meret);
         kever(szamok);
 
-        console.log(szamok);
+        //console.log(szamok);
 
-        
         let tombIndex = 0;
         let table = "<table class='memory'>";
 
@@ -125,7 +128,7 @@ function racsLetrehozas() {
         let cellak = document.querySelectorAll("td");
         cellak.forEach(aktualisCella => aktualisCella.addEventListener("click", openUp));
 
-        console.log(tarolo);
+        //console.log(tarolo);
         
         if (playTime === 0)
             stopper();
@@ -149,46 +152,74 @@ function openUp() {
     this.classList.remove("closed");
     this.classList.add("opened");
 
-    //800 ms múlva "visszazárjuk" a szám megjelenítését
-    cellOpenTimer = setTimeout(() => {
-        this.classList.remove("opened");
-        this.classList.add("closed");
-        this.innerHTML = "";
-    }, 800);
-
-    talalatFigyelo(cellaAdat);
-
-    if (gameOver) {
-        clearInterval(timeCounter);
-        resultDiv.style.display = "block";
-        resultDiv.innerHTML = `Gratulálok, a játékot sikeresen megoldottad! 
-                                A megfejtéshez ${playTime} másodpercre volt szükséged.`;
-        resultDiv.innerHTML += "<div><button onclick='playAgain()'>új játék</button></div>";
+    osszesKattintas++;
+    clicksDisplay.innerHTML = osszesKattintas;
+    kattintasTarolo.push(cellaAdat);
+    
+    //minden 2. cellakattintás esetén vizsgáljuk, hogy van-e egyezés
+    if (kattintasTarolo.length % 2 === 0) {
+        //megvizsgálni, hogy van-e találat
+        if (vanTalalat()) {
             
-    }
+            setReady();
+
+            if (gameOver) {
+                clearInterval(timeCounter);
+                resultDiv.style.display = "block";
+                resultDiv.innerHTML = `Gratulálok, a játékot sikeresen megoldottad! 
+                                        A megfejtéshez ${playTime} másodpercre volt szükséged.`;
+                resultDiv.innerHTML += "<div><button onclick='playAgain()'>Új játék</button></div>";
+                    
+            }
+        } 
+            
+        else //ha nem volt találat akkor 800 ms után "visszacsukjuk" a cellákat 
+            setTimeout(closeBack, 800);
+        
+    } 
 
 }
 
 
-function talalatFigyelo(cellaAdatok) {
+//a cellák "visszacsukását" végző fgv, nincs találat esetén
+function closeBack() {
 
-    kattintasTarolo.push(cellaAdatok);
-    //Csak a működés ellenőrzéséhez
-    //console.log(kattintasTarolo);
-    clicksDisplay.innerHTML = kattintasTarolo.length;
+    //végigmegyünk a kételemű kattintasTarolo tömbön (mindig a legutóbbi két kattintást tárolja csupán)
+    for (let i = 0; i < kattintasTarolo.length; i++) {
+        
+        let address = kattintasTarolo[i]['address'];
+
+        let cella = document.querySelector(`[data-index='${address}']`);
+
+        let value = kattintasTarolo[i]['value'];
+
+        cella.classList.remove("opened");
+        cella.classList.add("closed");
+        cella.innerHTML = "";
+
+    }
+
+    //ürítjük a kattintástárolót
+    kattintasTarolo.splice(0, kattintasTarolo.length);
+    
+}
+
+
+//Találatokat vizsgáló fgv
+function vanTalalat(cellaAdatok) {
 
     if (kattintasTarolo.length > 1) {
         let lastObj = kattintasTarolo.at(-1);
         let secondlastObj = kattintasTarolo.at(-2);
         
+        //DEBUG
+        //console.log(`Értékek: ${secondlastObj.value} és ${lastObj.value}`);
+        
         //Akkor van érvényes találat, ha a legutóbbi két kattintás eltérő "címen" történt 
         //(tehát nem ugyanazon a cellán) ÉS a cellák értékei viszont azonosak voltak
         if (lastObj.value === secondlastObj.value && lastObj.address !== secondlastObj.address) {
-            clearTimeout(cellOpenTimer);
             matches++;
             matchesDisplay.innerHTML = matches;
-            setReady(secondlastObj.address);
-            setReady(lastObj.address);
 
             //ha a találatok száma egyezik a játék végéhez szükséges találatok számával
             //akkor a játéknak vége van
@@ -201,40 +232,32 @@ function talalatFigyelo(cellaAdatok) {
         return false;
 }
 
+
 //A találat esetén módosítja a cella megjelenítését
-function setReady(cellaAddress) {
+function setReady() {
 
-    let cella = document.querySelector(`[data-index='${cellaAddress}']`);
+    //végigmegyünk a kételemű kattintasTarolo tömbön (mindig a legutóbbi két kattintást tárolja csupán)
+    for (let i = 0; i < kattintasTarolo.length; i++) {
+        
+        let address = kattintasTarolo[i]['address'];
 
-    let value = cella.getAttribute("data-value");
+        let cella = document.querySelector(`[data-index='${address}']`);
 
-    cella.classList.remove("closed");
-    cella.classList.add("ready");
-    cella.innerHTML = value;
+        let value = kattintasTarolo[i]['value'];
 
-    //a cellához rendelt eseménykezelő törlése, ergo többé nem nyitható fel
-    cella.removeEventListener("click", openUp);
+        cella.classList.remove("closed");
+        cella.classList.add("ready");
+        cella.innerHTML = value;
+
+        //a cellához rendelt eseménykezelő törlése, ergo többé nem nyitható fel
+        cella.removeEventListener("click", openUp);
+    }
+
+     //ürítjük a kattintástárolót
+     kattintasTarolo.splice(0, kattintasTarolo.length);
+    
 }
 
-
-/*
-function openAll() {
-    cellak.forEach(aktualisCella => {
-        let value = aktualisCella.getAttribute('data-cont');
-        aktualisCella.innerHTML = value;
-        aktualisCella.classList.remove("closed");
-        aktualisCella.classList.add("opened");
-    });
-}
-
-function closeAll() {
-    cellak.forEach(aktualisCella => {
-        aktualisCella.innerHTML = "";
-        aktualisCella.classList.remove("opened");
-        aktualisCella.classList.add("closed");
-    });
-}
-*/
 
 //A játékidőt mérő függvény
 function stopper() {

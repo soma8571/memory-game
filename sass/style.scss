@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+}
+
+$main-bg-color: #9B2915;
+$main-div-bg-color: #E9B44C;
+$main-font: 'Ubuntu', sans-serif;
+$input-bg-color: #E4D6A7;
+$box-shadow: 10px 10px 5px 1px rgba(28,17,10,0.75);
+$display-value-color: #50A2A7;
+
+
+body {
+    background-color: $main-bg-color;
+    font-family: $main-font;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.1em;
+    margin: 20px;
+    color: #E4D6A7;
+}
+
+div.description {
+    width: 80%;
+    padding: 20px;
+    margin: 50px auto;
+    text-align: justify;
+    line-height: 30px;
+    background-color: $main-div-bg-color;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+}
+
+span.desc {
+    text-decoration: underline;
+}
+
+select {
+    padding: 10px;
+    font-size: 0.9em;
+    font-family: $main-font;
+    background-color: $input-bg-color;
+    border: none;
+
+    option {
+        font-size: 0.9em;
+        font-family: $main-font;
+    }
+}
+
+
+table.memory {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+table.memory td {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    &:hover { cursor: pointer; }
+}
+
+.closed {
+    border: 1px solid gray;
+    background-color: #AAAAAA;
+}
+
+.opened {
+    border: 1px solid gray;
+    background-color: aqua;
+    color: black;
+}
+
+.ready {
+    border: 1px solid gray;
+    background-color: yellowgreen;
+    color: whitesmoke;
+}
+
+div.flex-cont {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.flex-cont div {
+    margin: 20px 30px;
+}
+
+div.display {
+    background-color: $main-div-bg-color;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 270px;
+    box-shadow: $box-shadow;
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul li {
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+div.result {
+    display: none;
+    width: 70%;
+    margin: 25px auto;
+    padding: 20px;
+    background-color: $main-div-bg-color;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    color: black;
+    background-color: $display-value-color;
+    color: $input-bg-color;
+    border: none;
+    border-radius: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+span.display {
+    color: $display-value-color;
+}

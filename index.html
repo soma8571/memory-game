@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Memória játék</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <h1>Üdv a memória fejlesztő játékban</h1>
 
     <div class="description">
-        <span class="desc">A játék leírása:</span> a választott nehézségi szinttől függően megjelenik egy
+        <span class="desc">A játék leírása:</span> <br>a választott nehézségi szinttől függően megjelenik egy
         n x n -es négyzet, ami rejtett számpárokat tartalmaz véletlenszerű sorrendben. A játék célja, hogy
         a számpárokat megtaláljuk. Megtaláltnak akkor minősül egy számpár, ha két egymást követő kattintással
         azonos számot rejtő cellára kattintunk. 
@@ -47,9 +47,9 @@
         
         <div class="display">
             <ul>
-                <li>Kattintások száma: <span id="clickNumber">0</span></li>
-                <li>Találatok száma: <span id="matches">0</span></li>
-                <li>Játékidő: <span id="time"></span></li>
+                <li>Kattintások száma: <span id="clickNumber" class="display"></span></li>
+                <li>Találatok száma: <span id="matches" class="display"></span></li>
+                <li>Játékidő: <span id="time" class="display"></span></li>
             </ul>
         </div>
 
